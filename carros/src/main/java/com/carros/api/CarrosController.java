@@ -33,7 +33,7 @@ public class CarrosController {
         return ResponseEntity.ok(carro); // Tratamento efetuado em CarroService com o Exception
     }
 
-    //Sempre que retornar um Array vazio,uma lista vazia.. Podemos fazer da seguinte situação :
+    //Sempre que retornar um Array vazio,uma lista vazia.. Podemos fazer da seguinte situação
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity getCarrosByTipo(@PathVariable("tipo") String tipo){
         List<CarroDTO> carros = service.getCarroByTipo(tipo);
