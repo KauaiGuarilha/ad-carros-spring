@@ -20,25 +20,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         User user = userRepo.findByLogin(username);
 
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException(" user not found");
-        }                                                                                               //acessando a senha do banco
-            return user;
+        } // acessando a senha do banco
+        return user;
     }
 }
 
-
 /*        ACESSO NÃO DINÂMICO                                                                  //acessando a senha do banco
-            return org.springframework.security.core.userdetails.User.withUsername(username).password(user.getSenha()).roles("USER").build();// senha de acesso*/
+return org.springframework.security.core.userdetails.User.withUsername(username).password(user.getSenha()).roles("USER").build();// senha de acesso*/
 
 /*if (username.equals("user")){
-            return User.withUsername(username).password(encoder.encode("admin")).roles("USER").build();// senha de acesso
-        }else if (username.equals("admin")){
-            return User.withUsername(username).password(encoder.encode("admin")).roles("USER", "ADMIN").build();
-        }*/
+    return User.withUsername(username).password(encoder.encode("admin")).roles("USER").build();// senha de acesso
+}else if (username.equals("admin")){
+    return User.withUsername(username).password(encoder.encode("admin")).roles("USER", "ADMIN").build();
+}*/
 
 /*  .withUser("root").password
-    .and()
-    .withUser("admin").password(encoder.encode("admin")).roles("USER", "ADMIN"); // Usuário ADMIN
+.and()
+.withUser("admin").password(encoder.encode("admin")).roles("USER", "ADMIN"); // Usuário ADMIN
 
-    return null;*/
+return null;*/

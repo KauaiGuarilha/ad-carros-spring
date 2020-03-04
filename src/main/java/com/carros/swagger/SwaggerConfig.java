@@ -15,8 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    @Bean //http://localhost:8080/swagger-ui.html#/
-    public Docket api(){
+    @Bean // http://localhost:8080/swagger-ui.html#/
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .contact(new Contact("Kauai Guarilha Freitas", "", "kauai.guarilha@hotmail.com"))
                 .title("carros")

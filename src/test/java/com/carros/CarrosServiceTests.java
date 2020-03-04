@@ -1,9 +1,12 @@
 package com.carros;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.carros.domain.Carro;
 import com.carros.domain.dto.CarroDTO;
 import com.carros.domain.dto.exception.ObjectNotFoundException;
 import com.carros.service.CarroService;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,75 +14,69 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class CarrosServiceTests {
 
-	@Autowired CarroService service;
+    @Autowired CarroService service;
 
-	@Test
-	public void testSave(){
+    @Test
+    public void testSave() {
 
-		Carro carro = new Carro(); //
-		carro.setNome("Ferrari");
-		carro.setTipo("Esportivo");
+        Carro carro = new Carro(); //
+        carro.setNome("Ferrari");
+        carro.setTipo("Esportivo");
 
-		CarroDTO c = service.insert(carro);
+        CarroDTO c = service.insert(carro);
 
-		Long id = c.getId();
-		assertNotNull(c);
+        Long id = c.getId();
+        assertNotNull(c);
 
-		// localizar o objeto
-		c = service.getCarroById(id);
-		assertNotNull(c);
+        // localizar o objeto
+        c = service.getCarroById(id);
+        assertNotNull(c);
 
-		Assertions.assertEquals("Ferrari", c.getNome());
-		Assertions.assertEquals("Esportivo", c.getTipo());
+        Assertions.assertEquals("Ferrari", c.getNome());
+        Assertions.assertEquals("Esportivo", c.getTipo());
 
-		//deletar
-		service.delete(id);
+        // deletar
+        service.delete(id);
 
-		//verificar se deletou
-		try {
-			assertNull(service.getCarroById(id));
-			fail("Não foi excluído");
-		}catch (ObjectNotFoundException ex){
-			//Ok
-		}
+        // verificar se deletou
+        try {
+            assertNull(service.getCarroById(id));
+            fail("Não foi excluído");
+        } catch (ObjectNotFoundException ex) {
+            // Ok
+        }
+    }
 
-	}
+    @Test
+    public void testLista() {
 
+        List<CarroDTO> carros = service.getCarros();
 
-	@Test
-	public void testLista() {
+        // assertEquals(36, carros.size());
 
-		List<CarroDTO> carros = service.getCarros();
+    }
 
-		//assertEquals(36, carros.size());
+    /*@Test
+    public void testListaPorTipo() {
 
+    	assertEquals(9, service.getCarroByTipo("classicos").size());
+    	assertEquals(10, service.getCarroByTipo("esportivos").size());
+    	assertEquals(10, service.getCarroByTipo("luxo").size());
 
-	}
+    	assertEquals(0, service.getCarroByTipo("x").size());
+    }*/
 
-	/*@Test
-	public void testListaPorTipo() {
+    /*@Test
+    public void testGet() {
 
-		assertEquals(9, service.getCarroByTipo("classicos").size());
-		assertEquals(10, service.getCarroByTipo("esportivos").size());
-		assertEquals(10, service.getCarroByTipo("luxo").size());
+    	CarroDTO c = service.getCarroById(11L);
 
-		assertEquals(0, service.getCarroByTipo("x").size());
-	}*/
-
-	/*@Test
-	public void testGet() {
-
-		CarroDTO c = service.getCarroById(11L);
-
-		assertNotNull(c);					//Rever
-		assertEquals("Ferrari FF", c.getNome());
-	}*/
+    	assertNotNull(c);					//Rever
+    	assertEquals("Ferrari FF", c.getNome());
+    }*/
 
 }

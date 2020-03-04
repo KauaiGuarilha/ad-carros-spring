@@ -1,15 +1,14 @@
 package com.carros.domain;
 
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Data                       //Necessário por conta do USER
+@Data // Necessário por conta do USER
 public class Role implements GrantedAuthority {
 
     @Id
